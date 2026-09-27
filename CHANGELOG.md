@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0-alpha.1]
+
 ### Added
 
 - Go 1.27 module baseline
@@ -19,3 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Mask key matching is case/separator-insensitive with nested and suffix lookup
 - Email/phone/card redaction shapes tightened for corporate logs
+
+## [v0.0.2-alpha.1] - 2026-09-28
+
+### Fixed
+
+- Token masking no longer emits stable fingerprints by default; `WithCorporateMasker(true)` enables them explicitly.
+- `RedactAuditText` removes URL query values and common inline credentials from audit details.

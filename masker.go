@@ -24,7 +24,7 @@ const (
 	MaskCard
 	// MaskSecret completely hides the value as [SECRET].
 	MaskSecret
-	// MaskToken redacts bearer/API tokens, keeping a short fingerprint.
+	// MaskToken redacts bearer/API tokens; fingerprinting is explicit opt-in.
 	MaskToken
 	// MaskJWT redacts JWT strings, keeping header.alg hint when parseable.
 	MaskJWT
@@ -202,13 +202,29 @@ func (m *CorporateMasker) Mask(value any, mType MaskType) any {
 }
 
 var (
-	reAWSKey   = regexp.MustCompile(`\b(AKIA|ASIA)[0-9A-Z]{16}\b`)
-	rePEM      = regexp.MustCompile(`-----BEGIN [A-Z ]*PRIVATE KEY-----`)
-	reBearer   = regexp.MustCompile(`(?i)^bearer\s+\S+`)
-	reJWT      = regexp.MustCompile(`^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$`)
-	reIBAN     = regexp.MustCompile(`(?i)\b[A-Z]{2}[0-9]{2}[A-Z0-9]{10,30}\b`)
-	reCardLike = regexp.MustCompile(`\b(?:\d[ -]*?){13,19}\b`)
+	reAuditQuery  = regexp.MustCompile(`\?[^\s]+`)
+	reAuditSecret = regexp.MustCompile(`(?i)\b(token|api[_-]?key|secret|password|authorization|cookie)=([^\s&]+)`)
+	reAuditBearer = regexp.MustCompile(`(?i)\bbearer\s+[^\s]+`)
+	reAWSKey      = regexp.MustCompile(`\b(AKIA|ASIA)[0-9A-Z]{16}\b`)
+	rePEM         = regexp.MustCompile(`-----BEGIN [A-Z ]*PRIVATE KEY-----`)
+	reBearer      = regexp.MustCompile(`(?i)^bearer\s+\S+`)
+	reJWT         = regexp.MustCompile(`^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$`)
+	reIBAN        = regexp.MustCompile(`(?i)\b[A-Z]{2}[0-9]{2}[A-Z0-9]{10,30}\b`)
+	reCardLike    = regexp.MustCompile(`\b(?:\d[ -]*?){13,19}\b`)
 )
+
+// RedactAuditText removes query values and common inline credentials from
+// unstructured audit details while preserving the rest of the explanation.
+func RedactAuditText(s string) string {
+	s = strings.ReplaceAll(strings.ReplaceAll(s, "\r", " "), "\n", " ")
+	s = reAuditQuery.ReplaceAllString(s, "?[REDACTED]")
+	s = reAuditSecret.ReplaceAllString(s, "$1=[SECRET]")
+	s = reAuditBearer.ReplaceAllString(s, "Bearer [TOKEN]")
+	if kind, ok := detectSecret(s); ok {
+		return fmt.Sprint((&CorporateMasker{}).Mask(s, kind))
+	}
+	return s
+}
 
 func detectSecret(s string) (MaskType, bool) {
 	s = strings.TrimSpace(s)
@@ -285,7 +301,7 @@ func maskCard(s string) string {
 
 func maskToken(s string, fingerprint bool) string {
 	s = strings.TrimSpace(s)
-	if fingerprint || len(s) > 12 {
+	if fingerprint {
 		sum := sha256.Sum256([]byte(s))
 		return "[TOKEN:" + hex.EncodeToString(sum[:6]) + "]"
 	}

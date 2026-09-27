@@ -138,7 +138,7 @@ func WithMaskRules(r *MaskRules) Option {
 // WithCorporateMasking installs CorporateMasker plus CorporateMaskRules.
 func WithCorporateMasking() Option {
 	return func(o *options) {
-		o.initialConfig.Masker = &CorporateMasker{Fingerprint: true}
+		o.initialConfig.Masker = &CorporateMasker{Fingerprint: false}
 		for k, v := range CorporateMaskRules().Keys() {
 			o.initialConfig.MaskKeys[k] = v
 		}
