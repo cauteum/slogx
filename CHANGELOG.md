@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0-alpha.2] - 2026-10-07
+
+### Changed
+
+- Publish the corrected `github.com/whaleshell/slogx` module path; the previous alpha tag declared an older path.
+- Update OpenTelemetry modules from v1.46.0 to v1.47.0.
+- Name the HTTP level-control timeouts and polling interval; simplify map copying without changing the public API.
+
 ## [v0.1.0-alpha.1]
 
 ### Added

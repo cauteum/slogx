@@ -273,7 +273,7 @@ func (s *dumpState) sliceValue(v any) []any {
 	rv := reflect.ValueOf(v)
 	n := rv.Len()
 	out := make([]any, 0, n)
-	for i := 0; i < n; i++ {
+	for i := range n {
 		if !s.nextField() {
 			out = append(out, truncatedMaxFields)
 			break

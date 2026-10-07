@@ -3,6 +3,7 @@ package slogx
 import (
 	"io"
 	"log/slog"
+	"maps"
 	"os"
 	"strings"
 )
@@ -48,19 +49,13 @@ func (c *Config) Clone() *Config {
 	newCfg := *c
 
 	newCfg.MaskKeys = make(MaskMap, len(c.MaskKeys))
-	for k, v := range c.MaskKeys {
-		newCfg.MaskKeys[k] = v
-	}
+	maps.Copy(newCfg.MaskKeys, c.MaskKeys)
 
 	newCfg.RemoveKeys = make(RemoveMap, len(c.RemoveKeys))
-	for k, v := range c.RemoveKeys {
-		newCfg.RemoveKeys[k] = v
-	}
+	maps.Copy(newCfg.RemoveKeys, c.RemoveKeys)
 
 	newCfg.LevelNames = make(LevelNames, len(c.LevelNames))
-	for k, v := range c.LevelNames {
-		newCfg.LevelNames[k] = v
-	}
+	maps.Copy(newCfg.LevelNames, c.LevelNames)
 
 	newCfg.ContextKeys = make([]ContextKey, len(c.ContextKeys))
 	copy(newCfg.ContextKeys, c.ContextKeys)
@@ -139,9 +134,7 @@ func WithMaskRules(r *MaskRules) Option {
 func WithCorporateMasking() Option {
 	return func(o *options) {
 		o.initialConfig.Masker = &CorporateMasker{Fingerprint: false}
-		for k, v := range CorporateMaskRules().Keys() {
-			o.initialConfig.MaskKeys[k] = v
-		}
+		maps.Copy(o.initialConfig.MaskKeys, CorporateMaskRules().Keys())
 	}
 }
 
@@ -176,9 +169,7 @@ func WithRemoval(set *RemovalSet) Option {
 // WithLevelNames customizes level string labels.
 func WithLevelNames(m LevelNames) Option {
 	return func(o *options) {
-		for k, v := range m {
-			o.initialConfig.LevelNames[k] = v
-		}
+		maps.Copy(o.initialConfig.LevelNames, m)
 	}
 }
 

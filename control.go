@@ -92,7 +92,7 @@ func (l *Logger) ListenLevelHTTP(ctx context.Context, addr string) (actualAddr s
 	mux := http.NewServeMux()
 	mux.Handle("/", l.LevelHTTPHandler())
 	mux.Handle("/level", l.LevelHTTPHandler())
-	srv := &http.Server{Addr: addr, Handler: mux, ReadHeaderTimeout: 5 * time.Second}
+	srv := &http.Server{Addr: addr, Handler: mux, ReadHeaderTimeout: controlHeaderReadTimeout}
 	ln, err := net.Listen("tcp", addr)
 	if err != nil {
 		return "", nil, err
@@ -102,7 +102,7 @@ func (l *Logger) ListenLevelHTTP(ctx context.Context, addr string) (actualAddr s
 	go func() {
 		<-ctx.Done()
 		// Parent is already done; WithoutCancel keeps values while allowing a fresh timeout.
-		shCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), 3*time.Second)
+		shCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), controlShutdownTimeout)
 		defer cancel()
 		_ = srv.Shutdown(shCtx)
 	}()
@@ -117,7 +117,7 @@ func (l *Logger) WatchLevelEnv(ctx context.Context, envKey string, interval time
 		envKey = "LOG_LEVEL"
 	}
 	if interval <= 0 {
-		interval = 2 * time.Second
+		interval = defaultLevelPollInterval
 	}
 	var last string
 	apply := func() {

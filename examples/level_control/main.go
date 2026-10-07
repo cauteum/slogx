@@ -37,7 +37,7 @@ func main() {
 		}
 	}()
 
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		log.Debug("tick", "i", i)
 		log.Info("tick-info", "i", i, "token", "sk-live-example-secret")
 		time.Sleep(300 * time.Millisecond)

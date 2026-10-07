@@ -1,12 +1,14 @@
 # slogx
 
+The local workspace checkout is named `whaleshell-slogx`. The published repository and Go module path remain `github.com/whaleshell/slogx` until a new release path is available.
+See [whaleshell development and releases](https://whaleshell.github.io/reference/development/) for the shared workspace and release process.
+
 [![CI](https://github.com/whaleshell/slogx/actions/workflows/ci.yml/badge.svg)](https://github.com/whaleshell/slogx/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/whaleshell/slogx.svg)](https://pkg.go.dev/github.com/whaleshell/slogx)
 [![Go 1.27+](https://img.shields.io/badge/Go-1.27+-blue)](https://go.dev/dl/)
 
-Enterprise-grade structured logging for Go, built on [`log/slog`](https://pkg.go.dev/log/slog).
-OpenTelemetry correlation, stack traces on errors, corporate redaction, and live log-level control —
-plus high-performance object dumping via [`saferefl`](https://github.com/lkmavi/saferefl).
+Structured logging for Go, built on [`log/slog`](https://pkg.go.dev/log/slog).
+It adds trace correlation, redaction, live level control, and bounded object dumping.
 
 ## Features
 
@@ -21,9 +23,10 @@ plus high-performance object dumping via [`saferefl`](https://github.com/lkmavi/
 
 ## Install
 
-```bash
-go get github.com/whaleshell/slogx
-```
+The current published alpha tag still declares an older module path, so `go get`
+from outside this workspace is not yet supported. For local development, use
+the sibling `go.work` workspace and run `go test ./...` in this checkout.
+The import path below is the intended path for the next coordinated release.
 
 ## Quick start
 

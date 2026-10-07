@@ -31,8 +31,7 @@ func TestSetLevelStringAndHTTP(t *testing.T) {
 	require.NoError(t, l.SetLevelString("debug"))
 	assert.Equal(t, slog.LevelDebug, l.Level())
 
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	ctx := t.Context()
 	addr, shutdown, err := l.ListenLevelHTTP(ctx, "127.0.0.1:0")
 	require.NoError(t, err)
 	defer func() { _ = shutdown(context.Background()) }()
@@ -55,8 +54,7 @@ func TestSetLevelStringAndHTTP(t *testing.T) {
 
 func TestWatchLevelEnv(t *testing.T) {
 	l := New(WithOutput(io.Discard), WithLevel(slog.LevelInfo))
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	ctx := t.Context()
 	t.Setenv("SLOGX_TEST_LEVEL", "error")
 	go l.WatchLevelEnv(ctx, "SLOGX_TEST_LEVEL", 50*time.Millisecond)
 	deadline := time.Now().Add(2 * time.Second)
