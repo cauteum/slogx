@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"maps"
 	"net/mail"
 	"regexp"
 	"strings"
@@ -76,9 +77,7 @@ func (r *MaskRules) Merge(other *MaskRules) *MaskRules {
 	if other == nil {
 		return r
 	}
-	for k, v := range other.rules {
-		r.rules[k] = v
-	}
+	maps.Copy(r.rules, other.rules)
 	return r
 }
 
