@@ -5,7 +5,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/whaleshell/slogx"
+	"github.com/cauteum/slogx"
 )
 
 func main() {
