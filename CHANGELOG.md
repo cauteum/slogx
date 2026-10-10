@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0-beta.1] - 2026-10-10
+
+### Changed
+
+- Complete the Cauteum rebrand while retaining the published `github.com/cauteum/slogx` Go module path.
+- Pin the Go 1.27.2 toolchain used by the release checks.
+
 ## [v0.1.0-alpha.2] - 2026-10-07
 
 ### Changed
