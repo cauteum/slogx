@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/cauteum-haven/slogx"
+	"github.com/cautem/slogx"
 )
 
 func main() {

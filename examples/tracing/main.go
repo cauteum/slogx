@@ -5,7 +5,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/cauteum-haven/slogx"
+	"github.com/cautem/slogx"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/sdk/trace"
 )

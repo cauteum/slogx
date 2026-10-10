@@ -4,7 +4,7 @@ package main
 import (
 	"context"
 
-	"github.com/cauteum-haven/slogx"
+	"github.com/cautem/slogx"
 )
 
 type CreateUserRequest struct {

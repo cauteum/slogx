@@ -1,4 +1,4 @@
-module github.com/cauteum-haven/slogx
+module github.com/cautem/slogx
 
 go 1.27.0
 
