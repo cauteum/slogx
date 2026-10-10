@@ -1,10 +1,10 @@
 # slogx
 
-The local workspace checkout is named `cauteum-slogx`. The published repository and Go module path remain `github.com/cauteum/slogx` until a new release path is available.
+The local workspace checkout is named `cauteum-slogx`. The published repository and Go module path remain `github.com/cauteum-haven/slogx` until a new release path is available.
 See [cauteum development and releases](https://cauteum.github.io/reference/development/) for the shared workspace and release process.
 
-[![CI](https://github.com/cauteum/slogx/actions/workflows/ci.yml/badge.svg)](https://github.com/cauteum/slogx/actions/workflows/ci.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/cauteum/slogx.svg)](https://pkg.go.dev/github.com/cauteum/slogx)
+[![CI](https://github.com/cauteum-haven/slogx/actions/workflows/ci.yml/badge.svg)](https://github.com/cauteum-haven/slogx/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/cauteum-haven/slogx.svg)](https://pkg.go.dev/github.com/cauteum-haven/slogx)
 [![Go 1.27+](https://img.shields.io/badge/Go-1.27+-blue)](https://go.dev/dl/)
 
 Structured logging for Go, built on [`log/slog`](https://pkg.go.dev/log/slog).
@@ -37,7 +37,7 @@ import (
     "context"
     "log/slog"
 
-    "github.com/cauteum/slogx"
+    "github.com/cauteum-haven/slogx"
 )
 
 func main() {

@@ -4,7 +4,7 @@ package main
 import (
 	"context"
 
-	"github.com/cauteum/slogx"
+	"github.com/cauteum-haven/slogx"
 )
 
 type Address struct {

@@ -10,7 +10,7 @@ Thank you for your interest in contributing!
 ## Quick Start
 
 ```bash
-git clone https://github.com/cauteum/slogx
+git clone https://github.com/cauteum-haven/slogx
 cd slogx
 
 go build ./...

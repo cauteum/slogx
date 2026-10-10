@@ -5,7 +5,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/cauteum/slogx"
+	"github.com/cauteum-haven/slogx"
 )
 
 func main() {

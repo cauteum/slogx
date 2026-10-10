@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/cauteum/slogx"
+	"github.com/cauteum-haven/slogx"
 )
 
 func main() {
