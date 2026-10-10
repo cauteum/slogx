@@ -1,7 +1,7 @@
 # slogx
 
 The local workspace checkout is named `cauteum-slogx`. The published repository and Go module path remain `github.com/cauteum-haven/slogx` until a new release path is available.
-See [cauteum development and releases](https://cauteum.github.io/reference/development/) for the shared workspace and release process.
+See [cauteum development and releases](https://cauteum-haven.github.io/reference/development/) for the shared workspace and release process.
 
 [![CI](https://github.com/cauteum-haven/slogx/actions/workflows/ci.yml/badge.svg)](https://github.com/cauteum-haven/slogx/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/cauteum-haven/slogx.svg)](https://pkg.go.dev/github.com/cauteum-haven/slogx)
